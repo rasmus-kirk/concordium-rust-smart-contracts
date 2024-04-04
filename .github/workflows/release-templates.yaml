@@ -1,7 +1,7 @@
 on:
   workflow_dispatch: # allows manual trigger
     inputs:
-      logLevel:
+      tag:
         description: "Release version, eg. 1.2.3 (Don't include a 'v'!)"
         required: true
 
@@ -712,22 +712,22 @@ jobs:
     runs-on: ubuntu-latest
     needs: 
       - cargo-generate-templates
-      - cargo-generate-credential-registry-template
-      - clippy-template
-      - clippy-credential-registry-template
-      - cargo-generate-cis2-nft-template-comparison
-      - cargo-generate-credential-registry-template-comparison
-      - clippy-cis2
-      - clippy
-      - clippy-crypto-primitives
-      - clippy-wasm32-only
-      - check-std-no-std
-      - check-no-std-examples
-      - check-crypto-examples
-      - clippy-schema
-      - test
-      - test-cis2-with-256
-      - test-examples
+      #- cargo-generate-credential-registry-template
+      #- clippy-template
+      #- clippy-credential-registry-template
+      #- cargo-generate-cis2-nft-template-comparison
+      #- cargo-generate-credential-registry-template-comparison
+      #- clippy-cis2
+      #- clippy
+      #- clippy-crypto-primitives
+      #- clippy-wasm32-only
+      #- check-std-no-std
+      #- check-no-std-examples
+      #- check-crypto-examples
+      #- clippy-schema
+      #- test
+      #- test-cis2-with-256
+      #- test-examples
     steps:
       - name: Checkout sources
         uses: actions/checkout@v4
