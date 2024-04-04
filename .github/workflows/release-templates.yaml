@@ -92,6 +92,7 @@ jobs:
         # available version of `cargo-generate-action` is 0.17.5
         uses: cargo-generate/cargo-generate-action@v0.17.5
         with:
+          arguments: "--tag ${{ env.TAG }}"
           name: ${{ env.PROJECT_NAME }}
           template: templates/credential-registry
           other: "-d description=myProject -d template_type=custom -d restorable=${{ matrix.restorable }} -d revocable_by_others=${{ matrix.revocable_by_others }}"
