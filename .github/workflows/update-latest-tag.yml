@@ -7,15 +7,34 @@ jobs:
   update-tag:
     name: Update the latest tag
     runs-on: ubuntu-latest
+    #permissions:
+    #  actions: write
     steps:
       - name: Checkout sources
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
           submodules: recursive
 
-      - name: Update latest tag
-        run: 'TAG=$(git describe --abbrev=0 --tags --match "releases/templates/*") && git tag -f releases/templates/latest "$TAG"'
+      #- name: Update latest tag
+      #  run: 'TAG=$(git describe --abbrev=0 --tags --match "releases/templates/v*") && git tag -f releases/templates/latest "$TAG"'
 
-      - name: Push Tag
-        run: git push origin releases/templates/latest --force
+      - name: Update latest tag
+        run: echo "TAG=$(git describe --abbrev=0 --tags --match 'releases/templates/v*')" >> $GITHUB_ENV
+
+      - run: echo "TAG_SHA=$(git show-ref --tags | grep "$TAG" | grep -o '^[^ ]*')" >> $GITHUB_ENV
+
+      - run: echo "${{ env.TAG }}"
+      - run: echo "${{ env.TAG_SHA }}"
+
+      - uses: rickstaa/action-create-tag@v1
+        id: "tag_create"
+        with:
+          tag: "releases/templates/latest"
+          commit_sha: ${{ env.TAG_SHA }}
+          force_push_tag: true
+          message: "Latest Release"
+
+      #- name: Push Tag
+      #  run: git push origin releases/templates/latest
