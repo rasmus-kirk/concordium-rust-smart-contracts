@@ -13,9 +13,6 @@ jobs:
         with:
           submodules: recursive
 
-      #- name: Fetch tags
-      #  run: git fetch --tags
-
       - name: Update latest tag
         run: 'TAG=$(git describe --abbrev=0 --tags --match "releases/templates/*") && git tag -f releases/templates/latest "$TAG"'
 
