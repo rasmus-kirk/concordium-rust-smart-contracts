@@ -335,7 +335,7 @@ jobs:
       - name: Create a GitHub release
         uses: ncipollo/release-action@v1
         with:
-          tag: releases/templates/${{ github.event.inputs.tag }}
+          tag: releases/templates/v${{ github.event.inputs.tag }}
           draft: true
           name: Template Release v${{ github.event.inputs.tag }}
           body: ${{ steps.tag_version.outputs.changelog }}

@@ -1,0 +1,21 @@
+on:
+  workflow_dispatch: # allows manual trigger
+
+name: Update Latest Template Tags
+
+jobs:
+  update-tag:
+    name: Update the latest tag
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Update latest tag
+        run: 'git tag -f releases/templates/latest $(git describe --abbrev=0 --tags --match "releases/templates/*")'
+
+      - name: Push Tag
+        run: git push --tags
+
