@@ -11,10 +11,8 @@ jobs:
       - name: Checkout sources
         uses: actions/checkout@v4
         with:
+          fetch-depth: 0
           submodules: recursive
-
-      - name: Fetch tags
-        run: git fetch --tags
 
       - name: Update latest tag
         run: 'TAG=$(git describe --abbrev=0 --tags --match "releases/templates/*") && git tag -f releases/templates/latest "$TAG"'
