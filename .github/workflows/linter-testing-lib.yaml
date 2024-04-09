@@ -8,7 +8,22 @@ name: "Testing library: Format, lint, build, and test"
 # for the smart contract testing library.
 
 on:
-  workflow_dispatch: # allows manual trigger
+  push:
+    branches: main
+
+  pull_request:
+    branches: main
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - ready_for_review
+    paths:
+      - 'contract-testing/**/*.rs'
+      - 'contract-testing/**/*.toml'
+      - 'rustfmt.toml'
+      - 'concordium-rust-sdk'
+      - 'concordium-std-derive'
 
 env:
   RUST_FMT: nightly-2023-04-01-x86_64-unknown-linux-gnu
