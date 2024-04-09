@@ -20,5 +20,5 @@ jobs:
         run: 'TAG=$(git describe --abbrev=0 --tags --match "releases/templates/*") && git tag -f releases/templates/latest "$TAG"'
 
       - name: Push Tag
-        run: git push --tags
+        run: git push --tags --force
 
