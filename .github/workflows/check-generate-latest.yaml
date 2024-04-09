@@ -3,11 +3,6 @@
 # issue on failure.
 
 on:
-  # Trigger the workflow on push or pull request,
-  # but only for the main branch
-  schedule:
-    - cron: '0 12 * * *' # run every day at 12
-
   workflow_dispatch: # allows manual trigger
 
 name: Check cargo-generate in all templates with the latest version.
